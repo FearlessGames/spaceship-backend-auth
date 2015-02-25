@@ -8,7 +8,7 @@ import java.util.concurrent.CopyOnWriteArraySet;
 
 public class Auth {
 	public static void main(String[] args) {
-		final Set<String> userNames = new CopyOnWriteArraySet<String>(Arrays.asList("hiflyer", "demazia"));
+		final Set<String> userNames = new CopyOnWriteArraySet<>(Arrays.asList("hiflyer", "demazia"));
 
 		MicroService microService = new MicroService(9999, (request, response) -> {
 			String userName = request.getPath().substring(1);
