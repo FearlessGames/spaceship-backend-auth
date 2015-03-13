@@ -1,8 +1,8 @@
 package se.fearless.spaceship.auth;
 
-import com.netflix.eureka2.client.resolver.ServerResolver;
-import com.netflix.eureka2.client.resolver.ServerResolvers;
-import se.fearless.service.*;
+import se.fearless.service.HttpMethod;
+import se.fearless.service.MicroService;
+import se.fearless.service.Router;
 
 import java.util.Arrays;
 import java.util.Set;
@@ -23,9 +23,8 @@ public class Auth {
 			}
 			return response.close();
 		});
-		EurekaServerInfo eurekaServerInfo = new EurekaServerInfo(ServerResolvers.from(new ServerResolver.Server("localhost", 2222)),
-				ServerResolvers.from(new ServerResolver.Server("localhost", 2223)));
-		MicroService microService = new MicroService(9999, router, "spaceship", "auth", eurekaServerInfo, new HostnameProvider());
+
+		MicroService microService = new MicroService.Builder(router, "spaceship", "auth").build();
 		microService.start();
 		microService.waitTillShutdown();
 	}
