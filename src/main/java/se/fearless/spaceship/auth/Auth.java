@@ -14,7 +14,7 @@ public class Auth {
 		final Set<String> userNames = new CopyOnWriteArraySet<>(Arrays.asList("hiflyer", "demazia"));
 
 		Router router = new Router();
-		router.addRoute(HttpMethod.GET, Pattern.compile("/.*"), (request, response) -> {
+		router.addRoute(HttpMethod.GET, Pattern.compile("/basic/.*"), (request, response) -> {
 			String userName = request.getPath().substring(1);
 			if (userNames.contains(userName)) {
 				response.writeString("SUCCESS");
