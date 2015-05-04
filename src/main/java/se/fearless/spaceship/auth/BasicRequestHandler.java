@@ -23,9 +23,9 @@ public class BasicRequestHandler implements RequestHandler<ByteBuf, ByteBuf> {
 	public Observable<Void> handle(HttpServerRequest<ByteBuf> request, HttpServerResponse<ByteBuf> response) {
 		String userName = request.getPath().substring(7);
 		if (userNames.contains(userName)) {
-			response.writeString(jsonSerializer.toJson(AuthResult.success(userName)));
+			response.writeString(jsonSerializer.toJson(AuthResultDTO.success(userName)));
 		} else {
-			response.writeString(jsonSerializer.toJson(AuthResult.fail()));
+			response.writeString(jsonSerializer.toJson(AuthResultDTO.fail()));
 		}
 		return response.close();
 	}

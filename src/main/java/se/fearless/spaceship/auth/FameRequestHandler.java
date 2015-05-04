@@ -33,7 +33,7 @@ public class FameRequestHandler implements RequestHandler<ByteBuf, ByteBuf> {
 		Observable<UserAccountDTO> userAccountDTOObservable = stringObservable.map(s -> jsonSerializer.fromJson(UserAccountDTO.class, s));
 
 		Observable<Observable<Void>> observable = userAccountDTOObservable
-				.map(userAccountDTO -> response.writeStringAndFlush(jsonSerializer.toJson(AuthResult.success(userAccountDTO.username))));
+				.map(userAccountDTO -> response.writeStringAndFlush(jsonSerializer.toJson(AuthResultDTO.success(userAccountDTO.username))));
 
 		return observable.flatMap(voidObservable -> voidObservable);
 
