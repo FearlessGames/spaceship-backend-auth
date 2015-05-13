@@ -30,7 +30,7 @@ public class FameRequestHandler implements RequestHandler<ByteBuf, ByteBuf> {
 		Observable<ByteBuf> byteBufObservable = httpGet.flatMap(AbstractHttpContentHolder::getContent);
 		Observable<String> stringObservable = byteBufObservable.map(byteBuf1 -> byteBuf1.toString(Charset.forName("UTF-8")));
 
-		Observable<UserAccountDTO> userAccountDTOObservable = stringObservable.map(s -> jsonSerializer.fromJson(UserAccountDTO.class, s));
+		Observable<UserAccountDTO> userAccountDTOObservable = stringObservable.map(s -> jsonSerializer.fromJson(s, UserAccountDTO.class));
 
 		Observable<Observable<Void>> observable = userAccountDTOObservable
 				.map(userAccountDTO -> response.writeStringAndFlush(jsonSerializer.toJson(AuthResultDTO.success(userAccountDTO.username))));
